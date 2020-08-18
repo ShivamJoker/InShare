@@ -10,16 +10,22 @@
 
 <body>
     <section class="upload-container">
-        <div class="drop-zone">
-            <div class="icon-container">
-                <img src="file.svg" class="main" alt="File Icon">
-                <img src="file.svg" class="left" alt="File Icon">
-                <img src="file.svg" class="right" alt="File Icon">
+        <form action="">
+            <div class="drop-zone">
+                <div class="icon-container">
+                    <img src="file.svg" class="center" alt="File Icon">
+                    <img src="file.svg" class="left" alt="File Icon">
+                    <img src="file.svg" class="right" alt="File Icon">
+                </div>
+                <input type="file" id="fileInput">
+                <div class="title">Drop your Files here or, <span id="browseBtn">browse</span></div>
             </div>
-            <div class="title">Drop your Files here or, <span id="browseBtn">browse</span></div>
-        </div>
+        </form>
         <div class="progress-container">
-
+            <div class="bg-progress"></div>
+            <div class="inner-container">
+                <h3>Uploading</h3>
+            </div>
         </div>
     </section>
     <script src="index.js"></script>

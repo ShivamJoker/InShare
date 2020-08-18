@@ -20,11 +20,21 @@ body,
 }
 
 .drop-zone {
-  width: 600px;
+  width: 500px;
   min-height: 200px;
   border: 2px dashed #0288d147;
   border-radius: 10px;
   margin: 30px;
+  transition: .2s all ease-in;
+}
+
+.drop-zone.dragged{
+    background: #edf5fe;
+    border-color: #0288d1;
+}
+
+.drop-zone input {
+    display: none;
 }
 
 .icon-container {
@@ -40,15 +50,8 @@ body,
   transform-origin: bottom;
 }
 
-.icon-container:hover > .right {
-  transform: rotate(10deg) translateX(20px);
-}
 
-.icon-container:hover > .left {
-  transform: rotate(-10deg) translateX(-20px);
-}
-
-.icon-container .main {
+.icon-container .center {
   z-index: 10;
 }
 .icon-container .right,
@@ -57,10 +60,13 @@ body,
   transform: scale(0.9);
 }
 
-.icon-expanded .right {
+.dragged .center{
+  transform: translateY(-5px);
+}
+.dragged .right {
   transform: rotate(10deg) scale(0.9) translateX(20px);
 }
-.icon-expanded .left {
+.dragged .left {
   transform: rotate(-10deg) scale(0.9) translateX(-20px);
 }
 
