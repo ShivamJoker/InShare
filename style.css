@@ -1,3 +1,74 @@
 body {
-    font-family: system-ui;
+  font-family: system-ui;
+  background: #edf5fe;
+  height: 98vh;
+}
+
+body,
+.upload-container,
+.drop-zone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.upload-container {
+  background: #ffffff;
+  border-radius: 25px;
+  box-shadow: 0px 20px 20px 0px #00000017;
+}
+
+.drop-zone {
+  width: 600px;
+  min-height: 200px;
+  border: 2px dashed #0288d147;
+  border-radius: 10px;
+  margin: 30px;
+}
+
+.icon-container {
+  position: relative;
+  width: 75px;
+  height: 100px;
+}
+
+.icon-container img {
+  width: 75px;
+  position: absolute;
+  transition: transform 0.25s ease-in-out;
+  transform-origin: bottom;
+}
+
+.icon-container:hover > .right {
+  transform: rotate(10deg) translateX(20px);
+}
+
+.icon-container:hover > .left {
+  transform: rotate(-10deg) translateX(-20px);
+}
+
+.icon-container .main {
+  z-index: 10;
+}
+.icon-container .right,
+.icon-container .left {
+  filter: grayscale(0.5);
+  transform: scale(0.9);
+}
+
+.icon-expanded .right {
+  transform: rotate(10deg) scale(0.9) translateX(20px);
+}
+.icon-expanded .left {
+  transform: rotate(-10deg) scale(0.9) translateX(-20px);
+}
+
+.title {
+  font-size: large;
+}
+
+#browseBtn {
+  color: #2196f3;
+  cursor: pointer;
 }
