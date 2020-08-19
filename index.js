@@ -42,12 +42,23 @@ const uploadFile = () => {
   // upload file
   const xhr = new XMLHttpRequest();
 
-//   xhr.upload.onprogress = updateProgress;
-  xhr.addEventListener("load", transferComplete);
-  xhr.addEventListener("error", transferFailed);
-  xhr.addEventListener("abort", transferCanceled);
+  // listen for upload progress
+  xhr.upload.onprogress = function (event) {
+    let percent = Math.round((100 * event.loaded) / event.total);
+    console.log(`File is ${percent} uploaded.`);
+  };
 
-  console.log(xhr);
+  // handle error
+  xhr.upload.onerror = function () {
+    console.log(`Error during the upload: ${xhr.status}.`);
+  };
+
+  // upload completed successfully
+  xhr.onload = function () {
+    console.log("Upload completed successfully.");
+  };
+
+  // listen for response which will give the link
   xhr.onreadystatechange = function () {
     if (xhr.readyState == XMLHttpRequest.DONE) {
       console.log(xhr.responseText);
@@ -57,26 +68,3 @@ const uploadFile = () => {
   xhr.open("POST", "http://localhost:3000/api/files");
   xhr.send(formData);
 };
-
-// progress on transfers from the server to the client (downloads)
-function updateProgress(oEvent) {
-  if (oEvent.lengthComputable) {
-    var percentComplete = (oEvent.loaded / oEvent.total) * 100;
-    console.log(percentComplete);
-    // ...
-  } else {
-    // Unable to compute progress information since the total size is unknown
-  }
-}
-
-function transferComplete(evt) {
-  console.log("The transfer is complete.", evt);
-}
-
-function transferFailed(evt) {
-  console.log("An error occurred while transferring the file.");
-}
-
-function transferCanceled(evt) {
-  console.log("The transfer has been canceled by the user.");
-}
