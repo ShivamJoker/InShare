@@ -2,6 +2,11 @@ const dropZone = document.querySelector(".drop-zone");
 const fileInput = document.querySelector("#fileInput");
 const browseBtn = document.querySelector("#browseBtn");
 
+const bgProgress = document.querySelector(".bg-progress");
+const progressPercent = document.querySelector("#progressPercent");
+const progressContainer = document.querySelector(".progress-container")
+const progressBar = document.querySelector(".progress-bar")
+
 browseBtn.addEventListener("click", () => {
   fileInput.click();
 });
@@ -34,10 +39,16 @@ fileInput.addEventListener("change", () => {
 });
 
 const uploadFile = () => {
+
   console.log("file added uploading");
+
   files = fileInput.files;
   const formData = new FormData();
   formData.append("myfile", files[0]);
+
+  //show the uploader
+  progressContainer.style.display = "block"
+
 
   // upload file
   const xhr = new XMLHttpRequest();
@@ -45,7 +56,10 @@ const uploadFile = () => {
   // listen for upload progress
   xhr.upload.onprogress = function (event) {
     let percent = Math.round((100 * event.loaded) / event.total);
-    console.log(`File is ${percent} uploaded.`);
+    progressPercent.innerText = percent;
+    const scaleX = `scaleX(${percent / 100})`
+    bgProgress.style.transform = scaleX; 
+    progressBar.style.transform = scaleX; 
   };
 
   // handle error
@@ -53,14 +67,10 @@ const uploadFile = () => {
     console.log(`Error during the upload: ${xhr.status}.`);
   };
 
-  // upload completed successfully
-  xhr.onload = function () {
-    console.log("Upload completed successfully.");
-  };
-
   // listen for response which will give the link
   xhr.onreadystatechange = function () {
     if (xhr.readyState == XMLHttpRequest.DONE) {
+      fileInput.value = '';
       console.log(xhr.responseText);
     }
   };
