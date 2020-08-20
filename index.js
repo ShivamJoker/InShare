@@ -15,8 +15,9 @@ const emailForm = document.querySelector("#emailForm");
 
 const toast = document.querySelector(".toast");
 
-const uploadURL = "http://localhost:3000/api/files";
-const emailURL = "http://localhost:3000/api/files/send";
+const baseURL = "http://localhost:3000"
+const uploadURL = `${baseURL}/api/files`;
+const emailURL = `${baseURL}/api/files/send`;
 
 browseBtn.addEventListener("click", () => {
   fileInput.click();
