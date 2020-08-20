@@ -38,22 +38,22 @@
 
 
             <div class="input-container">
-                <input type="text" disabled>
-                <img src="./copy-icon.svg" alt="copy to clipboard icon">
+                <input type="text" id="fileURL" readonly>
+                <img src="./copy-icon.svg" id="copyURLBtn" alt="copy to clipboard icon">
             </div>
 
 
             <p class="email-info">Or Send via Email</p>
             <div class="email-container">
-                <form>
+                <form id="emailForm">
                     <div class="filed">
                         <label for="fromEmail">Your email</label>
-                        <input type="email" autocomplete="email" required name="from email" id="fromEmail">
+                        <input type="email" autocomplete="email" required name="from-email" id="fromEmail">
                     </div>
 
                     <div class="filed">
                         <label for="toEmail">Receiver's email</label>
-                        <input type="email" required autocomplete="receiver" name="to email" id="toEmail">
+                        <input type="email" required autocomplete="receiver" name="to-email" id="toEmail">
                     </div>
                     <div class="send-btn-container">
                         <button type="submit">Send</button>
