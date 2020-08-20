@@ -12,6 +12,13 @@ body {
   overflow: hidden;
 }
 
+.logo {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 150px;
+}
+
 .image-vector {
   width: 50vw;
   height: 50vh;
@@ -255,5 +262,20 @@ body,
 }
 
 .show.toast {
-  transform:translate(50%, 0);
+  transform: translate(50%, 0);
+}
+
+@media screen and (max-width: 900px) {
+  :root {
+    --container-width: 320px;
+  }
+  .image-vector {
+    display: none;
+  }
+  .email-container .filed {
+    flex-direction: column;
+  }
+  .email-container .filed {
+    width: 300px;
+  }
 }
