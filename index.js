@@ -55,6 +55,11 @@ dropZone.addEventListener("dragleave", (e) => {
 
 // file input change and uploader
 fileInput.addEventListener("change", () => {
+  if (fileInput.files[0].size > maxAllowedSize) {
+    showToast("Max file size is 100MB");
+    fileInput.value = ""; // reset the input
+    return;
+  }
   uploadFile();
 });
 
@@ -95,6 +100,7 @@ const uploadFile = () => {
   // handle error
   xhr.upload.onerror = function () {
     showToast(`Error in upload: ${xhr.status}.`);
+    fileInput.value = ""; // reset the input
   };
 
   // listen for response which will give the link
