@@ -63,6 +63,7 @@ emailForm.addEventListener("submit", (e) => {
 
   // disable the button
   emailForm[2].setAttribute("disabled", "true");
+  emailForm[2].innerText = "Sending";
 
   const url = fileURL.value;
 
@@ -81,9 +82,9 @@ emailForm.addEventListener("submit", (e) => {
   })
     .then((res) => res.json())
     .then((data) => {
-        if (data.success) {
-            sharingContainer.style.display = "none"
-        }
+      if (data.success) {
+        sharingContainer.style.display = "none";
+      }
     });
 });
 
@@ -129,7 +130,8 @@ const uploadFile = () => {
 const onFileUploadSuccess = (res) => {
   fileInput.value = ""; // reset the input
   status.innerText = "Uploaded";
-
+  emailForm[2].removeAttribute("disabled");
+  emailForm[2].innerText = "Send";
   progressContainer.style.display = "none";
 
   const { file: url } = JSON.parse(res);
