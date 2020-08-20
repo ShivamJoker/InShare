@@ -15,7 +15,7 @@ const emailForm = document.querySelector("#emailForm");
 
 const toast = document.querySelector(".toast");
 
-const baseURL = "http://localhost:3000"
+const baseURL = "http://localhost:3000";
 const uploadURL = `${baseURL}/api/files`;
 const emailURL = `${baseURL}/api/files/send`;
 
@@ -29,12 +29,12 @@ dropZone.addEventListener("drop", (e) => {
   const maxAllowedSize = 100 * 1024 * 1024; //100mb
   const files = e.dataTransfer.files;
   if (files.length === 1) {
-    if (files[0].size > maxAllowedSize) {
+    if (files[0].size < maxAllowedSize) {
+      fileInput.files = files;
+      uploadFile();
+    } else {
       showToast("Max file size is 100MB");
-      return;
     }
-    fileInput.files = files;
-    uploadFile();
   } else if (files.length > 1) {
     showToast("You can't upload multiple files");
   }
