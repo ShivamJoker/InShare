@@ -11,12 +11,23 @@ body {
   height: 98vh;
 }
 
+.image-vector{
+  width: 50vw;
+  height: 50vh;
+  background: url(/undraw-upload.svg) no-repeat center;
+  background-size: contain;
+  
+}
+
 body,
 .upload-container,
 .drop-zone {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.upload-container,
+.drop-zone {
   flex-direction: column;
 }
 
