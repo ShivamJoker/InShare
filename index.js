@@ -13,6 +13,8 @@ const copyURLBtn = document.querySelector("#copyURLBtn");
 const fileURL = document.querySelector("#fileURL");
 const emailForm = document.querySelector("#emailForm");
 
+const toast = document.querySelector(".toast");
+
 const uploadURL = "http://localhost:3000/api/files";
 const emailURL = "http://localhost:3000/api/files/send";
 
@@ -52,40 +54,11 @@ fileInput.addEventListener("change", () => {
 copyURLBtn.addEventListener("click", () => {
   fileURL.select();
   document.execCommand("copy");
+  showToast("Copied to clipboard");
 });
 
 fileURL.addEventListener("click", () => {
   fileURL.select();
-});
-
-emailForm.addEventListener("submit", (e) => {
-  e.preventDefault(); // stop submission
-
-  // disable the button
-  emailForm[2].setAttribute("disabled", "true");
-  emailForm[2].innerText = "Sending";
-
-  const url = fileURL.value;
-
-  const formData = {
-    uuid: url.split("/").splice(-1, 1)[0],
-    emailTo: emailForm.elements["to-email"].value,
-    emailFrom: emailForm.elements["from-email"].value,
-  };
-  console.log(formData);
-  fetch(emailURL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(formData),
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      if (data.success) {
-        sharingContainer.style.display = "none";
-      }
-    });
 });
 
 const uploadFile = () => {
@@ -130,12 +103,56 @@ const uploadFile = () => {
 const onFileUploadSuccess = (res) => {
   fileInput.value = ""; // reset the input
   status.innerText = "Uploaded";
+
+  // remove the disabled attribute from form btn & make text send
   emailForm[2].removeAttribute("disabled");
   emailForm[2].innerText = "Send";
-  progressContainer.style.display = "none";
+  progressContainer.style.display = "none"; // hide the box
 
   const { file: url } = JSON.parse(res);
   console.log(url);
   sharingContainer.style.display = "block";
   fileURL.value = url;
+};
+
+emailForm.addEventListener("submit", (e) => {
+  e.preventDefault(); // stop submission
+
+  // disable the button
+  emailForm[2].setAttribute("disabled", "true");
+  emailForm[2].innerText = "Sending";
+
+  const url = fileURL.value;
+
+  const formData = {
+    uuid: url.split("/").splice(-1, 1)[0],
+    emailTo: emailForm.elements["to-email"].value,
+    emailFrom: emailForm.elements["from-email"].value,
+  };
+  console.log(formData);
+  fetch(emailURL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(formData),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.success) {
+        showToast("Email Sent");
+        sharingContainer.style.display = "none"; // hide the box
+      }
+    });
+});
+
+let toastTimer;
+// the toast function
+const showToast = (msg) => {
+  clearTimeout(toastTimer);
+  toast.innerText = msg;
+  toast.classList.add("show");
+  toastTimer = setTimeout(() => {
+    toast.classList.remove("show");
+  }, 2000);
 };
