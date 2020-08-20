@@ -34,7 +34,32 @@
 
         </div>
         <div class="sharing-container">
-            
+            <p class="expire">Link expires in 24 hrs</p>
+
+
+            <div class="input-container">
+                <input type="text" disabled>
+                <img src="./copy-icon.svg" alt="copy to clipboard icon">
+            </div>
+
+
+            <p class="email-info">Or Send via Email</p>
+            <div class="email-container">
+                <form>
+                    <div class="filed">
+                        <label for="fromEmail">Your email</label>
+                        <input type="email" autocomplete="email" required name="from email" id="fromEmail">
+                    </div>
+
+                    <div class="filed">
+                        <label for="toEmail">Receiver's email</label>
+                        <input type="email" required autocomplete="receiver" name="to email" id="toEmail">
+                    </div>
+                    <div class="send-btn-container">
+                        <button type="submit">Send</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </section>
     <script src="index.js"></script>
