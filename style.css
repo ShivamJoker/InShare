@@ -236,14 +236,22 @@ body,
 }
 
 .send-btn-container button {
-  font-size: 18px;
-  padding: 8px 40px;
-  margin-top: 15px;
-  background: var(--main-bg-color);
-  border: none;
-  border-radius: 5px;
-  color: #607d8b;
-  cursor: pointer;
+    font-size: 18px;
+    padding: 8px 40px;
+    margin-top: 15px;
+    background: var(--main-bg-color);
+    border: none;
+    border-radius: 5px;
+    color: #607d8b;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.send-btn-container button:hover{
+    background-color: var(--light-blue);
+    color: var(--main-bg-color);
+    font-weight: bold;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
 
 .toast {
